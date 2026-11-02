@@ -7989,15 +7989,15 @@ TinCan client library
                         }
                         return "[" + sOutput.substr(0, sOutput.length - 1) + "]";
                     }
-                    if (vContent.toString !== Object.prototype.toString) { return "\"" + vContent.toString().replace(/"/g, "\\$&") + "\""; }
+                    if (vContent.toString !== Object.prototype.toString) { return "\"" + vContent.toString().replace(/[\\"]/g, "\\$&") + "\""; }
                     for (sProp in vContent) {
                         if (vContent.hasOwnProperty(sProp)) {
-                            sOutput += "\"" + sProp.replace(/"/g, "\\$&") + "\":" + this.stringify(vContent[sProp]) + ",";
+                            sOutput += "\"" + sProp.replace(/[\\"]/g, "\\$&") + "\":" + this.stringify(vContent[sProp]) + ",";
                         }
                     }
                     return "{" + sOutput.substr(0, sOutput.length - 1) + "}";
                 }
-                return typeof vContent === "string" ? "\"" + vContent.replace(/"/g, "\\$&") + "\"" : String(vContent);
+                return typeof vContent === "string" ? "\"" + vContent.replace(/[\\"]/g, "\\$&") + "\"" : String(vContent);
             }
         };
     }
